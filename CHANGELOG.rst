@@ -6,6 +6,13 @@ This repository follows changelog_.
 
 We try to stick to **Semantic versioning**.
 
+[1.4.1] - 2025-08-25
+====================
+
+Added
+-----
+* Add audio support to the library.
+* Add an example to show how to receive audio.
 
 [1.4.0] - 2024-09-27
 ====================
