@@ -5,3 +5,9 @@ pylint
 pytest
 pytest-asyncio
 tox
+av
+numpy
+opencv-python
+sounddevice
+click
+rich
