@@ -81,14 +81,16 @@ class RTSPMediaSession:
             'Accept': 'application/sdp'
         })
 
-        if 'content-base' in resp.headers:
-            self.media_url = resp.headers['content-base']
-            self.logger.info('using base url: %s', self.media_url)
+        if resp.status == 200:
+            if 'content-base' in resp.headers:
+                self.media_url = resp.headers['content-base']
+                self.logger.info('using base url: %s', self.media_url)
 
-        self.logger.debug('received SDP:\n%s', resp.content)
-        self.sdp = SDP(resp.content)
-        self.logger.debug('parsed SDP:\n%s', json.dumps(self.sdp, indent=2))
-
+            self.logger.debug('received SDP:\n%s', resp.content)
+            self.sdp = SDP(resp.content)
+            self.logger.debug('parsed SDP:\n%s', json.dumps(self.sdp, indent=2))
+        else:
+            self.logger.error(f'Failed to get SDP: {resp.status} {resp.msg}')
         setup_url = self.sdp.setup_url(self.media_url, media_type=self.media_type)
         self.logger.info('setting up using URL: %s', setup_url)
 
